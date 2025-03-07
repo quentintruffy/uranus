@@ -1,3 +1,3 @@
-import './utils';
-import './events';
-import './modules/spawnmanager';
+import './job-imports';
+import './plugin-imports';
+import '../commands/index';

@@ -4,7 +4,7 @@
  * @param timeout Temps maximal d'attente en ms (défaut: 10000ms)
  * @returns Object avec data (succès) et error (message d'erreur si échec)
  */
-async function loadModel(
+export async function loadModel(
   modelHash: number,
   timeout: number = 10000
 ): Promise<{ error: string | null }> {
@@ -32,5 +32,3 @@ async function loadModel(
     return { error: `Erreur interne: ${err}` };
   }
 }
-
-export { loadModel };

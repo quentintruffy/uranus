@@ -1,32 +1,36 @@
-import { shutdownLoadingScreen } from '../utils/loadingscreen';
-import { loadModel } from '../utils/loadmodel';
-
-on('cp:client:onjoin', () => {
-  initializeSpawnPed();
-});
+import { shutdownLoadingScreen } from './loadingscreen';
+import { loadModel } from './models';
 
 const spawnPos = { x: -269.4, y: -955.3, z: 31.2, heading: 205.0 };
 
-/**
- * Initialise le spawn manager
- */
-export const initializeSpawnPed = async () => {
+export const generateBaseModel = (modelName: string): number | null => {
   try {
+    return GetHashKey(modelName);
+  } catch (error) {
+    return null;
+  }
+};
+
+export const initializePed = async () => {
+  try {
+    // Forcer le modèle de base
     const modelName = 'mp_m_freemode_01';
-    const modelHash = GetHashKey(modelName);
+    const modelHash = generateBaseModel(modelName);
+    if (!modelHash) {
+      throw new Error(`Impossible de trouver le modèle ${modelName}`);
+    }
 
-    //Attendre que le model soit prêt
+    // Attendre que le modèle soit chargé
     const { error } = await loadModel(modelHash);
-    if (error) return error;
+    if (error) throw new Error(error);
 
-    // Cree le ped avec le model chargé
+    // Créer le personnage avec le modèle
     const playerId = PlayerId();
     SetPlayerModel(playerId, modelHash);
 
-    // Attendre un tick pour que le model soit chargé
+    // Attendre un tick pour que le modèle soit chargé
     await new Promise((resolve) => setTimeout(resolve, 0));
 
-    // Créer le ped
     const ped = PlayerPedId();
 
     // Fermer l'écran de chargement
@@ -44,7 +48,7 @@ export const initializeSpawnPed = async () => {
       false,
       false
     );
-    SetEntityHeading(ped, GetEntityHeading(playerId));
+    SetEntityHeading(ped, spawnPos.heading);
 
     // S'assurer que le ped est vivant et visible
     SetEntityVisible(ped, true, false);
@@ -66,7 +70,6 @@ export const initializeSpawnPed = async () => {
     // Transition visuelle
     DoScreenFadeIn(500);
 
-    // Définir les valeurs par défaut du ped
     SetPedDefaultComponentVariation(ped);
     SetModelAsNoLongerNeeded(modelHash);
   } catch (error) {
