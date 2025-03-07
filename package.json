@@ -1,0 +1,29 @@
+{
+  "name": "uranus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node ./utils/dev.build.js",
+    "dev": "node ./utils/auto-rebuild.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quentintruffy/uranus.git"
+  },
+  "keywords": [],
+  "author": "QuentinTRUFFY",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quentintruffy/uranus/issues"
+  },
+  "homepage": "https://github.com/quentintruffy/uranus#readme",
+  "devDependencies": {
+    "@citizenfx/client": "2.0.13183-1",
+    "@citizenfx/server": "2.0.13183-1",
+    "@types/node": "^22.13.9",
+    "chokidar": "^4.0.3",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.2"
+  }
+}
