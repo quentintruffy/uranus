@@ -1,2 +1,2 @@
-import './job-imports';
 import './plugin-imports';
+import './job-imports';

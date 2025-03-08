@@ -32,6 +32,8 @@ RegisterCommand(
     SetPedIntoVehicle(PlayerPedId(), veh, -1);
     SetVehicleEngineOn(veh, true, true, false);
 
+    SendNuiMessage('e');
+
     console.log(`Véhicule ${model} créé !`);
   },
   false

@@ -55,7 +55,7 @@ if (!fs.existsSync(serverEntry)) {
 // Configuration de base commune aux deux builds
 const commonConfig = {
   bundle: true,
-  minify: true,
+  minify: false,
   target: ['es2020'],
   logLevel: 'info',
 };

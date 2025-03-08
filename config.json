@@ -1,0 +1,27 @@
+{
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "password": "",
+    "db": 0,
+    "keyPrefix": "uranus:"
+  },
+  "server": {
+    "name": "Serveur Uranus",
+    "maxPlayers": 64
+  },
+  "plugins": {
+    "enabledPlugins": ["LoadingScreen", "Redis"]
+  },
+  "jobs": {
+    "enabledJobs": ["metrodriver"],
+    "settings": {
+      "metrodriver": {
+        "trainCooldown": 120,
+        "maxTrainsPerPlayer": 1,
+        "stationRewards": true,
+        "maintenanceInterval": 3600000
+      }
+    }
+  }
+}
